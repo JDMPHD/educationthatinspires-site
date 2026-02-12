@@ -1,0 +1,182 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/MainNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { existsSync } from "node:fs";
+
+const materialsImage = existsSync(new URL("../../public/images/library/story-socratic.jpg", import.meta.url))
+  ? "/images/library/story-socratic.jpg"
+  : "/images/story-socratic.svg";
+
+const eraSpine = [
+  {
+    era: "00000-700",
+    title: "Origins And Civilizational Seeds",
+    focus: "Myth, ecology, early state formation, and the foundations of symbolic thought."
+  },
+  {
+    era: "700-1450",
+    title: "Networks, Faith, And Exchange",
+    focus: "Trade systems, religious encounters, medieval institutions, and comparative civilizations."
+  },
+  {
+    era: "1450-1750",
+    title: "Gunpowder, Empire, And Early Modern Change",
+    focus: "State formation, sectarian fault lines, global exchange, and emerging modernity."
+  },
+  {
+    era: "1750-1900",
+    title: "Reason, Revolution, And Industrial Power",
+    focus: "Enlightenment, social transformation, nationalism, and the contradictions of modern freedom."
+  }
+];
+
+const lessonCycle = [
+  {
+    title: "1. Scene Immersion",
+    detail: "Students enter each unit through short narrative moments (A Glimpse) that make abstract history concrete."
+  },
+  {
+    title: "2. Deep Theme",
+    detail: "Each chapter names a conceptual tension to track across events: power, freedom, adaptation, identity."
+  },
+  {
+    title: "3. Big Questions",
+    detail: "Seminar is organized around durable questions, not recall prompts, so students practice interpretation."
+  },
+  {
+    title: "4. Discussion Protocols",
+    detail: "Guided class question sets train students to compare claims, test evidence, and refine language in dialogue."
+  },
+  {
+    title: "5. AP Transfer Tasks",
+    detail: "Students convert seminar thinking into AP-style written argument, including LEQ modes."
+  }
+];
+
+const sampleQuestions = [
+  "Was feudal security worth the loss of freedom for most people?",
+  "Can a centralized empire stay adaptable across changing conditions?",
+  "Can reason alone guide justice, or does power always distort ideas?",
+  "Can democracy protect liberty without collapsing into demagoguery?"
+];
+
+const apTransfer = [
+  "Causation: Evaluate the causes and consequences of major historical shifts.",
+  "Continuity and Change Over Time: Track what persists and what transforms across eras.",
+  "Comparison: Contrast systems, leaders, or societies using defensible criteria."
+];
+
+const alignment = [
+  {
+    band: "Grades 9-10 (Creative World)",
+    text: "Students build humanities depth, argumentative reading, and seminar confidence using selected modules from the history sequence."
+  },
+  {
+    band: "Grade 11 (AP Seminar + AP World History + AP English)",
+    text: "Inquiry design, source reasoning, and historical argumentation become integrated across all three courses."
+  },
+  {
+    band: "Grade 12 (AP Research + AP Psychology + AP Literature)",
+    text: "Students extend methods into independent research while preserving voice, ethics, and intellectual originality."
+  }
+];
+---
+
+<BaseLayout title="Teaching Materials | Education That Inspires">
+  <MainNav current="materials" />
+
+  <main>
+    <section class="interior-hero section-frame">
+      <div class="reveal" data-delay="60">
+        <p class="eyebrow">Teaching Materials</p>
+        <h1>Teleodynamic History As A Structured Learning Engine</h1>
+        <p>
+          This page summarizes how ETI teaching materials move students from immersion and interpretation to AP-level
+          written argument and independent research.
+        </p>
+      </div>
+      <div class="hero-media reveal" data-delay="140">
+        <img
+          src={materialsImage}
+          alt="Students engaged in structured seminar and writing practice"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <section class="section-frame era-grid" aria-label="Historical era spine">
+      {
+        eraSpine.map((item, index) => (
+          <article class="era-card reveal" data-delay={String(index * 60)}>
+            <p class="step-band">{item.era}</p>
+            <h2>{item.title}</h2>
+            <p>{item.focus}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="section-frame">
+      <div class="section-head reveal" data-delay="0">
+        <p class="eyebrow">Lesson Architecture</p>
+        <h2>How A Typical Unit Works</h2>
+      </div>
+      <div class="process-grid">
+        {
+          lessonCycle.map((step, index) => (
+            <article class="process-step reveal" data-delay={String(70 + index * 50)}>
+              <h3>{step.title}</h3>
+              <p>{step.detail}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section-frame">
+      <div class="section-head reveal" data-delay="0">
+        <p class="eyebrow">Example Big Questions</p>
+        <h2>Seminar Prompts That Drive Interpretation</h2>
+      </div>
+      <div class="materials-quote-grid">
+        {
+          sampleQuestions.map((question, index) => (
+            <article class="materials-quote reveal" data-delay={String(80 + index * 45)}>
+              <p>{question}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section-frame stacked-panels">
+      <article class="panel reveal" data-delay="0">
+        <p class="eyebrow">AP Writing Transfer</p>
+        <h2>From Seminar To Assessable Argument</h2>
+        <ul>
+          {apTransfer.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="panel reveal" data-delay="80">
+        <p class="eyebrow">Grade-Band Alignment</p>
+        <h2>How Materials Integrate Across 9-12</h2>
+        <ul class="alignment-list">
+          {alignment.map((item) => <li><strong>{item.band}:</strong> {item.text}</li>)}
+        </ul>
+      </article>
+    </section>
+
+    <section class="section-frame note-block reveal" data-delay="160">
+      <h2>AI Literacy And Human Judgment</h2>
+      <p>
+        AI tools are used for synthesis, critique, and iteration, but never as a substitute for student thinking. The
+        instructional goal is deeper humanity with stronger method.
+      </p>
+      <p><a class="text-link" href="/evidence">See action-research evidence and student voice</a></p>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

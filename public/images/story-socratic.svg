@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-label="Socratic seminar placeholder">
+  <defs>
+    <linearGradient id="seminarBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#efe9dd"/>
+      <stop offset="100%" stop-color="#ddd0bc"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#seminarBg)"/>
+  <circle cx="190" cy="210" r="48" fill="#225660"/>
+  <circle cx="338" cy="198" r="52" fill="#2f6b74"/>
+  <circle cx="500" cy="214" r="55" fill="#ba5a2d"/>
+  <circle cx="664" cy="210" r="48" fill="#2f6b74"/>
+  <rect x="130" y="330" width="640" height="150" rx="18" fill="#fdfaf3"/>
+  <text x="170" y="400" font-family="Fraunces, Georgia, serif" font-size="44" fill="#12363d">Socratic Seminar Story Block</text>
+</svg>

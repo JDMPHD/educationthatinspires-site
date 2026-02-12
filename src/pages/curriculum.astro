@@ -1,0 +1,162 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/MainNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { existsSync } from "node:fs";
+
+const pathway = [
+  {
+    title: "Foundations (Grades 7-8)",
+    focus:
+      "Reading stamina, writing fluency, seminar habits, and love of literacy. This stage can begin in late middle school."
+  },
+  {
+    title: "The Creative World (Grades 9-10)",
+    focus:
+      "A preparatory deep-humanities and literary arts pathway. Grade 10 is the intensive bridge year into AP-level depth."
+  },
+  {
+    title: "Holistic AP Capstone (Grades 11-12)",
+    focus:
+      "A fully integrated two-year sequence centered on AP Capstone inquiry and companion humanities courses."
+  }
+];
+
+const yearElevenCourses = ["AP Seminar", "AP World History", "AP English"];
+const yearTwelveCourses = ["AP Research", "AP Psychology", "AP Literature"];
+const instructionalEngine = [
+  "Narrative entry points (A Glimpse) to ground abstract ideas in lived historical scenes",
+  "Deep Theme + Big Questions to frame concept-driven seminar work",
+  "Discussion protocols that move from interpretation to claim formation",
+  "AP writing transfer using causation, continuity/change, and comparison structures"
+];
+
+const curriculumImage = existsSync(new URL("../../public/images/library/hero.jpg", import.meta.url))
+  ? "/images/library/hero.jpg"
+  : "/images/story-creative.svg";
+---
+
+<BaseLayout title="Curriculum | Education That Inspires">
+  <MainNav current="curriculum" />
+
+  <main>
+    <section class="interior-hero section-frame">
+      <div class="reveal" data-delay="60">
+        <p class="eyebrow">Curriculum</p>
+        <h1>A Coherent 7-12 Learning Architecture</h1>
+        <p>
+          Education That Inspires now runs a clear developmental pathway from foundational literacy through a full
+          two-year AP Capstone sequence, all grounded in humane intellectual formation.
+        </p>
+      </div>
+      <div class="hero-media reveal" data-delay="140">
+        <img src={curriculumImage} alt="Students engaged in rigorous seminar and writing-based study" loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <section class="section-frame content-grid">
+      {
+        pathway.map((phase, index) => (
+          <article class="panel reveal" data-delay={String(index * 70)}>
+            <h2>{phase.title}</h2>
+            <p>{phase.focus}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="section-frame quote-band reveal" data-delay="100">
+      <div style="background: var(--surface); padding: 2rem; border-radius: var(--radius-md); border: 1px solid var(--line); box-shadow: var(--shadow-soft);">
+        <blockquote style="margin: 0;">
+          "I learned how to research, fact check, and speak my truth confidently, creating claims that are passionate as well as evidence-based. This synthesis may be one of the most important things I have learned."
+        </blockquote>
+        <p style="margin-top: 1rem; font-weight: 600; color: var(--accent);">— Jaiah, 18</p>
+      </div>
+    </section>
+
+    <section class="section-frame stacked-panels" id="ap-capstone">
+      <div class="panel reveal" data-delay="0" style="background: linear-gradient(to right, rgba(0, 119, 200, 0.08), rgba(255, 253, 248, 0.8)); border-color: rgba(0, 119, 200, 0.3);">
+        <p class="eyebrow" style="color: #0077C8;">Official College Board Authorized</p>
+        <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">AP Capstone Diploma™ Program</h2>
+        <p style="max-width: 60ch;">
+          A two-year seminar-based credential that fosters the research, collaboration, and presentation skills key to college success. 
+          ETI students complete this alongside our advanced humanities core.
+        </p>
+      </div>
+
+      <div class="split-grid reveal" data-delay="100" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <article class="panel">
+          <p class="step-band">Year 1 (Grade 11)</p>
+          <h3>The Seminar Phase</h3>
+          <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+            <li style="margin-bottom: 0.5rem; padding-left: 1rem; border-left: 3px solid var(--accent);">
+              <strong>AP Seminar</strong><br/>
+              <span style="font-size: 0.9rem; color: var(--muted);">Team Project & Presentation, Individual Research-Based Essay & Presentation</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; padding-left: 1rem; border-left: 3px solid var(--deep-soft);">
+              <strong>AP World History: Modern</strong>
+            </li>
+            <li style="padding-left: 1rem; border-left: 3px solid var(--deep-soft);">
+              <strong>AP English Language</strong>
+            </li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <p class="step-band">Year 2 (Grade 12)</p>
+          <h3>The Research Phase</h3>
+          <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+            <li style="margin-bottom: 0.5rem; padding-left: 1rem; border-left: 3px solid var(--accent);">
+              <strong>AP Research</strong><br/>
+              <span style="font-size: 0.9rem; color: var(--muted);">Academic Paper (4,000-5,000 words) & Presentation / Oral Defense</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; padding-left: 1rem; border-left: 3px solid var(--deep-soft);">
+              <strong>AP Psychology</strong>
+            </li>
+            <li style="padding-left: 1rem; border-left: 3px solid var(--deep-soft);">
+              <strong>AP English Literature</strong>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-frame note-block reveal" data-delay="120">
+      <h2>Instructional Engine</h2>
+      <ul>
+        {instructionalEngine.map((item) => <li>{item}</li>)}
+      </ul>
+      <p><a class="text-link" href="/materials">See the Teaching Materials architecture</a></p>
+    </section>
+
+    <section class="section-frame note-block reveal" data-delay="160" style="background: color-mix(in srgb, var(--accent) 8%, var(--surface)); border-color: rgba(186, 90, 45, 0.25);">
+      <h2 style="color: var(--accent-strong);">Frontier AI Collaboration</h2>
+      <p style="font-size: 1.15rem; font-weight: 500; color: var(--ink);">
+        We don't just "allow" AI; we train students to lead with it.
+      </p>
+      <p>
+        In the AP Research phase, students leverage advanced LLMs as dialectical partners to stress-test arguments, 
+        synthesize vast data, and refine their original voice. This is high-level cognitive training for a 
+        post-AI university landscape.
+      </p>
+      <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(186, 90, 45, 0.2);">
+        <p style="font-style: italic; font-size: 0.95em;">
+          "The program has a really nice balance between classic yet fun AP studies while still keeping it modern and using technology to our advantage." <br/>
+          <span style="display: block; margin-top: 0.5rem; font-style: normal; font-weight: 600;">— Josh, 18</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="section-frame note-block reveal" data-delay="220">
+      <h2>Program Status And Scope</h2>
+      <p>
+        Education That Inspires is a fully approved, accredited AP Capstone program through the U.S. College Board.
+        In Grades 11-12, ETI integrates this two-year sequence with companion AP humanities courses in one coherent
+        research-centered design.
+      </p>
+      <p><a class="text-link" href="/evidence">See Evidence and Student Voice</a></p>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

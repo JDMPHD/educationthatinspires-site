@@ -1,0 +1,132 @@
+---
+interface Link {
+  href: string;
+  label: string;
+  key: string;
+}
+
+interface Props {
+  current?: string;
+}
+
+const { current = "home" } = Astro.props;
+
+const links: Link[] = [
+  { href: "/", label: "Home", key: "home" },
+  { href: "/literacy", label: "Literacy (Tweens)", key: "literacy" },
+  { href: "/thecreativeworld", label: "Creative World (Teens)", key: "creative" },
+  { href: "/curriculum", label: "AP Capstone", key: "curriculum" },
+  { href: "/evidence", label: "Student Work", key: "evidence" },
+  { href: "/contact", label: "Contact", key: "contact" }
+];
+---
+
+<header class="site-header reveal" data-delay="0">
+  <a href="/" class="brand">Education That Inspires</a>
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span class="hamburger"></span>
+  </button>
+  <nav aria-label="Main navigation">
+    {
+      links.map((link) => (
+        <a href={link.href} aria-current={current === link.key ? "page" : undefined}>
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<style>
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 30;
+  }
+
+  .hamburger {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    position: relative;
+    transition: background 200ms ease;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    transition: transform 200ms ease;
+  }
+
+  .hamburger::before { top: -7px; }
+  .hamburger::after { top: 7px; }
+
+  .nav-toggle[aria-expanded="true"] .hamburger {
+    background: transparent;
+  }
+
+  .nav-toggle[aria-expanded="true"] .hamburger::before {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle[aria-expanded="true"] .hamburger::after {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 44rem) {
+    .nav-toggle {
+      display: block;
+    }
+
+    .site-header {
+      flex-wrap: wrap;
+    }
+
+    .site-header nav {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      padding-top: 0.8rem;
+    }
+
+    .site-header nav.open {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  function initNav() {
+    const toggle = document.querySelector(".nav-toggle");
+    const nav = document.querySelector(".site-header nav");
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      nav.classList.toggle("open");
+    });
+
+    // Close on link click (mobile)
+    nav.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        toggle.setAttribute("aria-expanded", "false");
+        nav.classList.remove("open");
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initNav);
+  document.addEventListener("astro:page-load", initNav);
+</script>

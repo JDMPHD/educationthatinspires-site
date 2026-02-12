@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/MainNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<BaseLayout title="Contact | Education That Inspires">
+  <MainNav current="contact" />
+
+  <main>
+    <section class="interior-hero section-frame">
+      <div class="reveal" data-delay="60">
+        <p class="eyebrow">Contact</p>
+        <h1>Start A Conversation About Your Student’s Learning Goals</h1>
+        <p>
+          Share where your student is now and where you want them to grow. We will map a clear starting plan together.
+        </p>
+      </div>
+      <div class="panel reveal" data-delay="140">
+        <h2>Direct Email</h2>
+        <p><a class="text-link" href="mailto:jdmichelsphd@gmail.com">jdmichelsphd@gmail.com</a></p>
+        <p>Email is currently the primary intake channel for program conversations.</p>
+      </div>
+    </section>
+
+    <section class="section-frame content-grid">
+      <article class="panel reveal" data-delay="0">
+        <h2>For Families</h2>
+        <p>Include student grade and whether you are seeking Foundations (7-8), Creative World (9-10), or AP Capstone (11-12).</p>
+      </article>
+      <article class="panel reveal" data-delay="70">
+        <h2>For Students</h2>
+        <p>Share one strength, one struggle, and one question you want to investigate this year through your learning.</p>
+      </article>
+      <article class="panel reveal" data-delay="140">
+        <h2>AI + Humanities Focus</h2>
+        <p>If relevant, include how your student currently uses AI tools so we can calibrate a human-first literacy plan.</p>
+      </article>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

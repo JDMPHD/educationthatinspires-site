@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/MainNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<BaseLayout title="Privacy | Education That Inspires">
+  <MainNav current="privacy" />
+
+  <main>
+    <section class="interior-hero section-frame">
+      <div class="reveal" data-delay="60">
+        <p class="eyebrow">Privacy</p>
+        <h1>Privacy And Student Media</h1>
+        <p>
+          Education That Inspires is committed to respectful handling of family communication and student-related
+          materials.
+        </p>
+      </div>
+      <article class="panel reveal" data-delay="140">
+        <h2>Contact</h2>
+        <p>
+          Privacy requests can be sent to
+          <a class="text-link" href="mailto:jdmichelsphd@gmail.com"> jdmichelsphd@gmail.com</a>.
+        </p>
+      </article>
+    </section>
+
+    <section class="section-frame stacked-panels">
+      <article class="panel reveal" data-delay="0">
+        <h2>Information You Share</h2>
+        <p>
+          When you contact ETI by email, information you provide (such as name, grade level, and learning goals) is
+          used only to respond to your inquiry and plan educational services.
+        </p>
+      </article>
+      <article class="panel reveal" data-delay="70">
+        <h2>Student Names And Photos</h2>
+        <p>
+          Student names and photos published on this site are used with approval. If a family wants content updated or
+          removed, ETI will process that request promptly.
+        </p>
+      </article>
+      <article class="panel reveal" data-delay="140">
+        <h2>Sharing And Security</h2>
+        <p>
+          ETI does not sell personal information. Information shared for admissions or academic planning is handled as
+          private educational communication.
+        </p>
+      </article>
+    </section>
+
+    <section class="section-frame note-block reveal" data-delay="210">
+      <h2>Updates</h2>
+      <p>This page may be updated as operations evolve. Last updated: February 7, 2026.</p>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

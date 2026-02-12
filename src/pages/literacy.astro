@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/MainNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { existsSync } from "node:fs";
+
+const literacyImage = existsSync(new URL("../../public/images/library/literacy-hero.jpg", import.meta.url))
+  ? "/images/library/literacy-hero.jpg"
+  : "/images/story-socratic.svg";
+
+const pillars = [
+  {
+    title: "Reading for Pleasure",
+    text: "We support young teens and tweens in falling in love with reading. An intrinsic enjoyment of good stories is the foundation of all academic success."
+  },
+  {
+    title: "Creative Writing",
+    text: "Using genre fiction to build fundamental skills in organization, complex thought, and expression without the pressure of high-stakes testing."
+  },
+  {
+    title: "Foundational Grammar & Logic",
+    text: "Establishing the rules of language so they can be mastered—and eventually artfully broken."
+  }
+];
+---
+
+<BaseLayout title="For Love of Literacy | Education That Inspires">
+  <MainNav current="literacy" />
+
+  <main>
+    <section class="interior-hero section-frame">
+      <div class="reveal" data-delay="60">
+        <p class="eyebrow">For Love of Literacy (Tweens)</p>
+        <h1>Foundations: Falling In Love With The Written Word</h1>
+        <p>
+          We support young teens and tweens in discovering that reading and writing are not chores, but gateways to new worlds.
+          True literacy is more than a skill; it is a passion and a way of life.
+        </p>
+      </div>
+      <img
+        class="reveal"
+        data-delay="140"
+        src={literacyImage}
+        alt="Young student reading a book with deep engagement"
+        loading="lazy"
+        decoding="async"
+        style="object-position: top;"
+      />
+    </section>
+
+    <section class="section-frame content-grid">
+      {
+        pillars.map((pillar, index) => (
+          <article class="panel reveal" data-delay={String(index * 70)}>
+            <h2>{pillar.title}</h2>
+            <p>{pillar.text}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="section-frame quote-band reveal" data-delay="220">
+      <div style="background: var(--surface); padding: 2rem; border-radius: var(--radius-md); border: 1px solid var(--line); box-shadow: var(--shadow-soft);">
+        <blockquote style="margin: 0;">
+          "Analyzing sources and weaving them into comprehensible essays has proven to be a massively important step for my advancement from a student to a researcher. It’s such a refreshing experience to find myself under the guidance of teachers that value contextual, three-dimensional learning instead of rote memorization."
+        </blockquote>
+        <p style="margin-top: 1rem; font-weight: 600; color: var(--accent);">— Tommy, 14</p>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

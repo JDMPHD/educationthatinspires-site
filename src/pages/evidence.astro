@@ -1,0 +1,155 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/MainNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+const snapshots = [
+  { label: "Action-Research Cohort", value: "6 Students" },
+  { label: "Age Range", value: "14-18" },
+  { label: "ESL Representation", value: "50%" },
+  { label: "Program Duration Mix", value: "4 Long-Term, 2 New" }
+];
+
+const studentVoices = [
+  {
+    quote:
+      "Analyzing sources and weaving them into essays was a massively important step in my advancement from student to researcher.",
+    attribution: "Tommy, 14"
+  },
+  {
+    quote:
+      "I learned how to research, fact check, and speak my truth confidently, creating claims that are passionate as well as evidence-based.",
+    attribution: "Jaiah, 18"
+  },
+  {
+    quote:
+      "In one day at ETI, I learned more than I had in years at other schools.",
+    attribution: "Kian, 16"
+  },
+  {
+    quote:
+      "The program has a really nice balance between classic AP studies and modern technology, including the world of AI.",
+    attribution: "Josh, 18"
+  },
+  {
+    quote:
+      "The process tested and grew my critical thinking, debate skills, teamwork, and organization.",
+    attribution: "Walden, 17"
+  },
+  {
+    quote:
+      "ETI taught me to think beyond the surface by questioning rhetoric, purpose, and evidence.",
+    attribution: "Aiden, 16"
+  }
+];
+
+const dialogueHighlights = [
+  {
+    line:
+      "The in-between space is where everything happens. That is where we think, have conversations, and create the foundation.",
+    context: "Student dialogue, January 2026"
+  },
+  {
+    line:
+      "If anything, I should think through the full picture first, then choose the phrase.",
+    context: "Student dialogue, January 2026"
+  },
+  {
+    line:
+      "Science, for me, is not a matter of content. It is a matter of method.",
+    context: "Mentor-family dialogue, December 2025"
+  }
+];
+---
+
+<BaseLayout title="Evidence | Education That Inspires">
+  <MainNav current="evidence" />
+
+  <main>
+    <section class="interior-hero section-frame">
+      <div class="reveal" data-delay="60">
+        <p class="eyebrow">Evidence & Student Voice</p>
+        <h1>The Lighting of a Fire: Action Research In Practice</h1>
+        <p>
+          "The Lighting of a Fire" (2026) is a published action-research dossier documenting the transition of students 
+          from passive recipients of content to active creators of knowledge.
+        </p>
+        <div style="margin-top: 1.5rem;">
+          <a href="https://philarchive.org/archive/MICTLO-10" target="_blank" class="btn-primary">Read Full Paper on PhilArchive &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame note-block reveal" data-delay="100">
+      <h2>Abstract</h2>
+      <p>
+        This action research demonstrates the extraordinary development possible even within a short time frame when 
+        student-centered and liberatory education is combined with holistic, humanistic mentorship outside of 
+        institutional assumptions regarding standardization of teaching and learning.
+      </p>
+    </section>
+
+    <section class="section-frame stats-grid reveal" data-delay="0" aria-label="Action research snapshot">
+      {
+        snapshots.map((item) => (
+          <article class="panel">
+            <p class="eyebrow">Snapshot</p>
+            <h2>{item.value}</h2>
+            <p>{item.label}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="section-frame">
+      <div class="section-head reveal" data-delay="0">
+        <p class="eyebrow">Student Reflections</p>
+        <h2>What Students Reported</h2>
+      </div>
+      <div class="testimonial-grid" role="list">
+        {
+          studentVoices.map((item, index) => (
+            <article class="testimonial-card reveal" data-delay={String(70 + index * 35)} role="listitem">
+              <p>"{item.quote}"</p>
+              <strong>{item.attribution}</strong>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section-frame stacked-panels">
+      <article class="panel reveal" data-delay="0">
+        <p class="eyebrow">Research Strands</p>
+        <h2>Student Inquiry Topics</h2>
+        <ul>
+          <li>Truth in the age of AI and social media literacy</li>
+          <li>Connectivist models and alternatives to conventional schooling</li>
+          <li>Critical thinking and parental mediation in AI-heavy media environments</li>
+          <li>Authoritarianism, resistance, and political ethics in Indonesia</li>
+        </ul>
+      </article>
+      <article class="panel reveal" data-delay="80">
+        <p class="eyebrow">Dialogue Evidence</p>
+        <h2>Seminar Process In Student Language</h2>
+        <ul>
+          {dialogueHighlights.map((item) => <li><strong>{item.context}:</strong> {item.line}</li>)}
+        </ul>
+      </article>
+    </section>
+
+    <section class="section-frame note-block reveal" data-delay="160">
+      <h2>Source Base</h2>
+      <p>
+        Derived from: <em>The Lighting of a Fire</em> action research dossier and linked ETI dialogue transcripts in the
+        Teleodynamic Education archive (Dec 2025 - Jan 2026).
+      </p>
+      <p>
+        For instructional design structure drawn from Teleodynamic History modules, see the
+        <a class="text-link" href="/materials"> Teaching Materials page</a>.
+      </p>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

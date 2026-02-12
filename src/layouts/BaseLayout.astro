@@ -1,0 +1,84 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Education That Inspires | A Return to Real Education",
+  description = "Education That Inspires (ETI) is an AP Capstone Diploma microschool founded on holistic rigor — the conviction that deep, disciplined learning and creative self-actualization are lifelong partners.",
+  ogImage = "/images/library/hero.jpg"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Education That Inspires" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Scroll Reveal Observer
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px 0px -50px 0px", // Trigger slightly before element is fully in view
+        threshold: 0.15
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            const delay = target.getAttribute("data-delay");
+
+            if (delay) {
+              target.style.transitionDelay = `${delay}ms`;
+            }
+            
+            target.classList.add("active");
+            observer.unobserve(target); // Only animate once
+          }
+        });
+      }, observerOptions);
+
+      const initReveal = () => {
+        const elements = document.querySelectorAll(".reveal");
+        elements.forEach((el) => observer.observe(el));
+      };
+
+      // Run on load and after view transitions (if any)
+      document.addEventListener("DOMContentLoaded", initReveal);
+      document.addEventListener("astro:page-load", initReveal); // Support for View Transitions if added later
+    </script>
+  </body>
+</html>

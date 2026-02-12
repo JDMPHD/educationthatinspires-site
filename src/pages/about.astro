@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/MainNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { existsSync } from "node:fs";
+
+const aboutImage = existsSync(new URL("../../public/images/library/about-hero.jpg", import.meta.url))
+  ? "/images/library/about-hero.jpg"
+  : "/images/story-socratic.svg";
+---
+
+<BaseLayout title="About | Education That Inspires">
+  <MainNav current="about" />
+
+  <main>
+    <section class="interior-hero section-frame">
+      <div class="reveal" data-delay="60">
+        <p class="eyebrow">About Education That Inspires</p>
+        <h1>Scholarship, Creativity, And Human Formation Across Grades 7-12</h1>
+        <p>
+          Education That Inspires is built around one conviction: students flourish when rigorous academics, creative
+          practice, and mentorship are integrated over time in one coherent pathway.
+        </p>
+      </div>
+      <img
+        class="reveal"
+        data-delay="120"
+        src={aboutImage}
+        alt="Portrait of Dr. Julian, founder of Education That Inspires"
+        loading="lazy"
+        decoding="async"
+      />
+    </section>
+
+    <section class="section-frame content-grid">
+      <article class="panel reveal" data-delay="0">
+        <h2>Mission</h2>
+        <p>
+          Form students who think clearly, speak truthfully, write powerfully, and lead with both intellectual rigor
+          and ethical depth.
+        </p>
+      </article>
+      <article class="panel reveal" data-delay="80">
+        <h2>Program Architecture</h2>
+        <p>
+          Foundations (7-8), Creative World (9-10), and a holistic AP Capstone pathway (11-12) designed as one
+          developmental sequence rather than isolated classes. ETI is fully approved and accredited for AP Capstone
+          through the U.S. College Board.
+        </p>
+      </article>
+      <article class="panel reveal" data-delay="160">
+        <h2>AI Pedagogy</h2>
+        <p>
+          ETI teaches frontier AI literacy: how to collaborate with tools critically and creatively while preserving
+          original voice, discernment, and humanity.
+        </p>
+      </article>
+    </section>
+
+    <section class="section-frame quote-band reveal" data-delay="220">
+      <blockquote>
+        "This is not just tutoring. It is the formation of a thinker. Our child writes with originality and speaks with
+        confidence now."
+      </blockquote>
+      <p>Parent, Upper School</p>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

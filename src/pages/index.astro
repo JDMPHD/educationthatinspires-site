@@ -1,0 +1,264 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/MainNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import VideoCard from "../components/VideoCard.astro";
+import { existsSync } from "node:fs";
+
+const heroImage = existsSync(new URL("../../public/images/library/hero.jpg", import.meta.url))
+  ? "/images/library/hero.jpg"
+  : "/images/hero-cinematic.svg";
+
+const storyCreativeImage = existsSync(new URL("../../public/images/library/story-creative.jpg", import.meta.url))
+  ? "/images/library/story-creative.jpg"
+  : "/images/story-creative.svg";
+
+const reflections = [
+  {
+    text: "The last month has been one of — if not the single — most influential periods of my education. Analyzing sources and weaving them into comprehensible essays has proven to be a massively important step for my advancement from a student to a researcher. Definitely my favorite school experience full stop.",
+    name: "Tommy (14 years)"
+  },
+  {
+    text: "Instead of my pain points being something I avoided, they became something that allowed me to compassionately connect with those facing the struggle. I learned how to research, fact check, and speak my truth confidently, creating claims that are passionate as well as evidence-based.",
+    name: "Jaiah (18 years)"
+  },
+  {
+    text: "The way we learn in Dr. J's school is very different from my other schools. I learnt a lot more in a day than I have in years at other schools. I really liked the process because it was genuinely fun although it was tough and definitely stressful. I look back at it in a great way as I have learnt to open new doorways.",
+    name: "Kian (16 years)"
+  },
+  {
+    text: "Over the course of the program my love and enthusiasm for the project has grown a lot. It has transferred into my day to day life, providing me a different perspective on what drives society, increasing my vocabulary, and making me more open to new adventures and possibilities.",
+    name: "Josh (18 years)"
+  },
+  {
+    text: "This month has both tested and grown my critical thinking, debate skills, my team work, and lastly, my organization and focusing skills. In the end I came out with an essay that I'm genuinely happy with, and that says a lot because I'm very critical of my work.",
+    name: "Walden (17 years)"
+  },
+  {
+    text: "ETI is not only a powerful space for learning intellectually, but an overall development for who you are and who you want to become. Even in this short time, I've realized that education is far more than knowledge — it's about growth, understanding, and becoming the best version of yourself.",
+    name: "Aiden (16 years)"
+  }
+];
+
+const programs = [
+  {
+    name: "For Love of Literacy",
+    audience: "Tweens",
+    description: "We support young teens and tweens in falling in love with reading and writing. We use genre fiction and creative writing to build fundamental skills in organization, complex thought, creative rigor, and ELA.",
+    href: "/literacy"
+  },
+  {
+    name: "The Creative World",
+    audience: "Teens",
+    description: "We don't think that good education should amount to a preparation for soulless survival inside an incoherent machine. Education, in our view, is the awakening of true knowledge of oneself and the world.",
+    href: "/thecreativeworld"
+  },
+  {
+    name: "AP Capstone Diploma™ Program",
+    audience: "College-Facing",
+    description: "ETI is a fully authorized AP Capstone Diploma program. We guide students through the complete two-year sequence (Seminar & Research) integrated with advanced humanities, fostering elite research and argumentation skills.",
+    href: "/curriculum"
+  }
+];
+---
+
+<BaseLayout title="Education That Inspires | A Return to Real Education">
+  <MainNav current="home" />
+
+  <main id="top">
+    <section class="hero section-frame">
+      <div class="hero-copy reveal" data-delay="60">
+        <p class="eyebrow" style="color: #0077C8; font-weight: 800;">Authorized AP Capstone Diploma™ Program</p>
+        <h1>A Return to Real Education</h1>
+        <p>
+          Education that Inspires (ETI) was born of the conviction that nothing is more important than deep learning—the
+          celebration of disciplined study not as obedience, but as exciting self-actualization.
+        </p>
+        
+        <div class="hero-actions">
+          <a href="/contact" class="btn-primary">Start a Conversation</a>
+          <a href="/evidence" class="btn-secondary">See Student Work</a>
+        </div>
+      </div>
+      <div class="hero-media reveal" data-delay="140">
+        <img src={heroImage} alt="Students engaged in Socratic seminar inside a classic library setting" loading="eager" decoding="async" />
+      </div>
+    </section>
+
+    <section class="narrative section-frame reveal" data-delay="200">
+      <div class="prose">
+        <p>
+          Julian D. Michels is an educational innovator and school founder, as well as a philosopher,
+          historian, physicist, psychologist, and author of the 2025-2026 <em>Principia Cybernetica</em>.
+        </p>
+        <p>
+          <em>Education that Inspires</em> (ETI) was born of his conviction that nothing is more important
+          than deep learning, and the reality that deep learning is vanishingly rare in the world of
+          institutionalized schooling.
+        </p>
+        <p>
+          After serving as faculty at both international schools and universities, Dr. Julian came to believe
+          that (a) the world is changing faster than institutions are keeping pace and (b) truly creative,
+          student-centered education is impossible within institutions whose first loyalty is conformity to
+          existing hierarchies and power structures.
+        </p>
+        <p>
+          Of course, many parents and educators share these concerns. Unfortunately, most educational projects
+          striving for a more liberated approach lose academic rigor and discipline in the process, which is a
+          tragedy of human potential undeveloped.
+        </p>
+        <p>
+          Dr. Julian's theorem: True education occupies a space of <strong><em>holistic rigor</em></strong>:
+          the celebration of deep and disciplined learning not as obedience but as exciting
+          <strong><em>self-actualization</em></strong>. With this in mind, ETI does not only pursue creative,
+          student-centered learning — it does so as a fully authorized AP Capstone Diploma Program, accredited
+          as such by the prestigious USA College Board.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-frame reveal" data-delay="0">
+      <div class="prose">
+        <p class="transition-text">
+          Well, holistic rigor sounds good in theory. But do ETI's methods actually work? Let's ask our students:
+        </p>
+      </div>
+    </section>
+
+    <section class="students section-frame" id="students">
+      <div class="story-row reveal" data-delay="100">
+        <img
+          src={storyCreativeImage}
+          alt="Dr. Julian mentoring a student in focused conversation"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="prose">
+          <p class="student-intro">
+            One of ETI's pillars is deep reading, writing, thinking, and true engagement with the humanities.
+            Reading and writing, for us, are not chores or skills — they are initiation into ancestry,
+            knowledge, creation, and culture. Our students don't study to "complete their homework." They learn
+            literature. They add their voices to a conversation that extends across the ages and into a future
+            that we are creating together with our minds and lives.
+          </p>
+        </div>
+      </div>
+
+      <article class="student-letter reveal" data-delay="200">
+        <p class="eyebrow">A Summer Reading Letter</p>
+        <p>
+          "Dear Dr. Julian,
+        </p>
+        <p>
+          As of writing this, I have just finished <em>The Tombs of Atuan</em>, and thusly the first set of
+          our Summer reading materials!
+        </p>
+        <p>
+          When I started on this set of books at the beginning of Summer, I really wasn't a big reader. I would
+          read occasionally, but it was mainly linguistic or academic writing – never really reading for pleasure
+          or for a good story.
+        </p>
+        <p>
+          Over the course of reading these books though, I've noticed not only have I been able to reach deep
+          and beautiful ideas that formerly seemed so foreign to me, but also I've been loving doing it!
+        </p>
+        <p>
+          The two <em>Earthsea</em> books have given me a whole new idea of fiction and writing in general,
+          embedding metaphysical and deep ideas into what on the surface appear to be books about wizards.
+          <em>Siddhartha</em> has given me not only beautiful-sounding text, but also has led me into
+          contemplation of reality and this beautiful world we live in. The <em>Dao de Jing</em> has given me
+          my favorite text of all time, guiding my mind towards enlightenment and happiness.
+        </p>
+        <p>
+          This is all to say that I've loved reading these books you've picked out, and I want to say a huge
+          thank you for introducing me to this new passion."
+        </p>
+        <p class="student-attribution">~Tommy (15)</p>
+      </article>
+
+      <div class="prose reveal" data-delay="0">
+        <p>
+          You can read <a class="text-link" href="/evidence"><strong><em>The Lighting of a Fire</em></strong></a>
+          for a compilation of student work and reflections from ETI's 2025 action-research cycle — six students,
+          ages 14 to 18, who selected their own topics of passion and learned the art of research as intellectual
+          activism. What results is evidence of what education can become when pursued as human potential cultivated
+          by the human spirit.
+        </p>
+      </div>
+
+      <div class="section-head reveal" data-delay="0">
+        <p class="eyebrow">Student Voices</p>
+        <h2>Experience the Transformation</h2>
+      </div>
+      
+      <div class="video-grid section-frame" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+        <VideoCard 
+          id="a5_iSoTRrGY" 
+          name="Liz" 
+          title="From Student to UC Berkeley Scholar"
+        />
+        <VideoCard 
+          id="WnWp66ltAOw" 
+          name="Huy" 
+          title="Finding a Global Voice"
+        />
+        <VideoCard 
+          id="9eKzrPwVTuM" 
+          name="Sivani" 
+          title="The ETI Experience"
+        />
+      </div>
+
+      <div class="section-head reveal" data-delay="0">
+        <p class="eyebrow">Student Reflections</p>
+        <h2>In Their Own Words</h2>
+      </div>
+      <div class="reflections-grid" role="list">
+        {
+          reflections.map((item, index) => (
+            <article class="reflection reveal" data-delay={String(100 + index * 100)} role="listitem">
+              <blockquote>
+                <p>"{item.text}"</p>
+              </blockquote>
+              <footer>
+                <strong>{item.name}</strong>
+              </footer>
+            </article>
+          ))
+        }
+      </div>
+      <p class="reveal read-more" data-delay="0">
+        <a class="text-link" href="/evidence">Read the full evidence and student work &rarr;</a>
+      </p>
+    </section>
+
+    <section class="offerings section-frame" id="offerings">
+      <div class="section-head reveal" data-delay="0">
+        <h2>Our Offerings</h2>
+      </div>
+      {
+        programs.map((program, index) => (
+          <article class="offering reveal" data-delay={String(100 + index * 150)}>
+            <h3>
+              {program.name}
+              <span class="offering-audience">{program.audience}</span>
+            </h3>
+            <p>{program.description}</p>
+            {program.href && <a class="text-link" href={program.href}>Learn more &rarr;</a>}
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="cta section-frame reveal" data-delay="0" id="contact">
+      <h2>Contact Us</h2>
+      <p>We are always available to support our families. Don't hesitate to reach out.</p>
+      <div class="contact-details">
+        <a class="btn-primary" href="mailto:jdmichelsphd@gmail.com">jdmichelsphd@gmail.com</a>
+        <p class="contact-phone">+1 (541) 543-7147</p>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

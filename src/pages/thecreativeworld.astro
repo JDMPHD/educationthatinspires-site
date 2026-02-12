@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/MainNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { existsSync } from "node:fs";
+
+const creativeImage = existsSync(new URL("../../public/images/library/creative-hero.jpg", import.meta.url))
+  ? "/images/library/creative-hero.jpg"
+  : "/images/story-creative.svg";
+
+const pillars = [
+  {
+    title: "Deep Humanities Inquiry",
+    text: "Students read closely, interpret symbol and structure, and build nuanced arguments rooted in textual evidence."
+  },
+  {
+    title: "Literary Arts Formation",
+    text: "Writing workshops strengthen voice, craft, revision discipline, and expressive precision across genres."
+  },
+  {
+    title: "Preparatory AP Readiness",
+    text: "Seminar dialogue and project synthesis train students for the demands of ETI's fully approved, accredited AP Capstone pathway."
+  }
+];
+---
+
+<BaseLayout title="The Creative World | Education That Inspires">
+  <MainNav current="creative" />
+
+  <main>
+    <section class="section-frame quote-band reveal" data-delay="60">
+      <div style="background: var(--surface); padding: 2rem; border-radius: var(--radius-md); border: 1px solid var(--line); box-shadow: var(--shadow-soft);">
+        <blockquote style="margin: 0;">
+          "ETI is not only a powerful space for learning intellectually, but an overall development for who you are... Even in this short time, I’ve realized that education is far more than knowledge – it's about growth, understanding, and becoming the best version of yourself."
+        </blockquote>
+        <p style="margin-top: 1rem; font-weight: 600; color: var(--accent);">— Aiden, 16</p>
+      </div>
+    </section>
+
+    <section class="interior-hero section-frame" style="padding-top: 2rem;">
+      <div class="reveal" data-delay="100">
+        <p class="eyebrow">The Creative World</p>
+        <h1>A Grades 9-10 Preparatory Humanities Studio</h1>
+        <p>
+          "The way we learn is very different from my other schools. I learnt a lot more in a day than I have in years at other places. 
+          I really liked the process because it was genuinely fun although it was tough and definitely stressful." <br/>
+          <span style="display: block; margin-top: 0.5rem; font-style: italic; font-size: 0.9em;">— Kian, 16</span>
+        </p>
+      </div>
+      <img
+        class="reveal"
+        data-delay="140"
+        src={creativeImage}
+        alt="Student in focused reflection and writing practice during Creative World session"
+        loading="lazy"
+        decoding="async"
+      />
+    </section>
+
+    <section class="section-frame">
+      <div class="section-head reveal" data-delay="0">
+        <p class="eyebrow">The 4 Narrative Arcs</p>
+        <h2>A Journey Through Human Consciousness</h2>
+      </div>
+      
+      <div class="pathway-track reveal" data-delay="100">
+        <div class="pathway-step">
+          <p class="step-band">Arc 1</p>
+          <h3>Roots & Origins</h3>
+          <p>Identity, Civilization, and the Ancient World. Tracing the first sparks of human culture.</p>
+        </div>
+        <div class="pathway-step">
+          <p class="step-band">Arc 2</p>
+          <h3>Power & Tradition</h3>
+          <p>Colonialism, Imperialism, Tradition, and Revolution. How structures start, hold, and break.</p>
+        </div>
+        <div class="pathway-step">
+          <p class="step-band">Arc 3</p>
+          <h3>The Modern Fracture</h3>
+          <p>Modernity, War, Critique, and Multiculturalism. The shattering of old worlds and the birth of the new.</p>
+        </div>
+        <div class="pathway-step">
+          <p class="step-band">Arc 4</p>
+          <h3>Future Horizons</h3>
+          <p>Grasping the Present and Imagining the Future. Preparing to lead in a world that is still waking up.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-frame content-grid">
+      {
+        pillars.map((pillar, index) => (
+          <article class="panel reveal" data-delay={String(index * 70)}>
+            <h2>{pillar.title}</h2>
+            <p>{pillar.text}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="section-frame note-block reveal" data-delay="180">
+      <h2>Human-First Technology</h2>
+      <p>
+        While students are introduced to digital tools, our Grade 9-10 focus remains recklessly human. 
+        We prioritize pen-on-paper drafts, face-to-face seminar dialogue, and the development of an unshakeable 
+        inner voice before introducing complex AI workflows.
+      </p>
+    </section>
+
+    <section class="section-frame quote-band reveal" data-delay="220">
+      <blockquote>
+        "Creative World gave me the discipline to think, write, and speak clearly. By the time I entered AP work, I
+        felt ready."
+      </blockquote>
+      <p>Student, Grade 11</p>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
