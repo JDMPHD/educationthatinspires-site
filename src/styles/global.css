@@ -913,7 +913,6 @@ footer {
 
 .offering:last-of-type {
   border-bottom: none;
-  padding-bottom: 0;
 }
 
 .offering h3 {
@@ -941,6 +940,79 @@ footer {
 .offering .text-link {
   display: inline-block;
   margin-top: 0.7rem;
+}
+
+/* Narrative section image */
+.narrative-image {
+  max-width: 42rem;
+  margin-inline: auto;
+  margin-bottom: 2.5rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(217, 208, 193, 0.55);
+}
+
+.narrative-image img {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.05);
+}
+
+/* Tommy portrait in letter */
+.letter-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.tommy-portrait {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(15, 59, 66, 0.15);
+  flex-shrink: 0;
+}
+
+.letter-header .eyebrow {
+  margin-bottom: 0;
+}
+
+/* Photo grid row */
+.photo-row {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+.photo-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.photo-grid-3 img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(217, 208, 193, 0.55);
+  box-shadow: var(--shadow-soft);
+  filter: saturate(0.95) contrast(1.05);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+}
+
+.photo-grid-3 img:hover {
+  transform: scale(1.03);
+  filter: saturate(1.05) contrast(1.1);
+}
+
+@media (max-width: 66rem) {
+  .photo-grid-3 {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Contact details */
