@@ -1,0 +1,378 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/MainNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+const title = "Free AP Essay Workshop | Practice AP Lang & AP Seminar Essays Online";
+const description = "Free interactive AP essay practice for AP English Language, AP Seminar, and AP Capstone students. Build skills in rhetorical analysis, source-based argument, synthesis, and timed essay writing — no account required to explore.";
+
+const features = [
+  {
+    rung: "1",
+    title: "Source Analysis",
+    exam: "AP Seminar EOCa",
+    desc: "Identify arguments, trace reasoning, and evaluate evidence across passages of increasing complexity.",
+    time: "~90 min"
+  },
+  {
+    rung: "2",
+    title: "Rhetorical Analysis",
+    exam: "AP Lang FRQ 2",
+    desc: "Spot rhetorical strategies, build analytical thesis statements, and write structured analysis paragraphs.",
+    time: "~120 min"
+  },
+  {
+    rung: "3",
+    title: "Research-Based Argument",
+    exam: "AP Seminar EOCb",
+    desc: "Map how sources talk to each other, develop your own perspective, and build evidence-driven arguments.",
+    time: "~120 min"
+  },
+  {
+    rung: "4",
+    title: "The Argument Essay",
+    exam: "AP Lang FRQ 3",
+    desc: "Generate evidence from your own knowledge, craft defensible theses, and argue with nuance and precision.",
+    time: "~110 min"
+  },
+  {
+    rung: "5",
+    title: "Synthesis",
+    exam: "AP Lang FRQ 1",
+    desc: "Triage multiple sources, take a position on a complex issue, and weave sources into a cohesive argument.",
+    time: "~110 min"
+  }
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- JSON-LD for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "AP Essay Workshop — The Pedagogical Ladder",
+    "description": description,
+    "provider": {
+      "@type": "Organization",
+      "name": "Education That Inspires",
+      "url": "https://educationthatinspires.com"
+    },
+    "isAccessibleForFree": true,
+    "educationalLevel": "High School",
+    "teaches": ["AP English Language", "AP Seminar", "AP Capstone", "Essay Writing", "Rhetorical Analysis", "Synthesis Essay", "Argument Essay"],
+    "url": "https://educationthatinspires.com/ap-essay-workshop"
+  })} />
+
+  <MainNav current="workshop" />
+
+  <main>
+    <!-- Hero -->
+    <section class="workshop-hero">
+      <div class="workshop-hero-inner">
+        <p class="eyebrow">Free Resource &mdash; No Cost, No Catch</p>
+        <h1>AP Essay Workshop</h1>
+        <p class="workshop-subtitle">
+          The Pedagogical Ladder &mdash; five structured rungs that build the essay skills
+          tested on <strong>AP English Language</strong>, <strong>AP Seminar</strong>, and the
+          <strong>AP Capstone Diploma</strong>.
+        </p>
+        <p class="workshop-pitch">
+          Built by <a href="/">Education That Inspires</a>, a fully authorized AP Capstone
+          Diploma&trade; program. Used by our students. Now open to yours.
+        </p>
+        <div class="workshop-actions">
+          <a href="/ap-essay-workshop/app/" class="btn-primary btn-launch">Start the Workshop &rarr;</a>
+          <a href="#how-it-works" class="btn-secondary">See What&rsquo;s Inside</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- What You'll Practice -->
+    <section id="how-it-works" class="workshop-section">
+      <h2>What You&rsquo;ll Practice</h2>
+      <p class="section-lead">
+        Each rung targets a specific AP essay type. Warm-ups build the skill with guided exercises
+        and real historical source material. Then you write under timed conditions &mdash; the same
+        format you&rsquo;ll face on exam day.
+      </p>
+
+      <div class="rung-grid">
+        {features.map((f) => (
+          <div class="rung-card">
+            <div class="rung-number">{f.rung}</div>
+            <div class="rung-body">
+              <h3>{f.title}</h3>
+              <span class="rung-exam">{f.exam}</span>
+              <p>{f.desc}</p>
+              <span class="rung-time">{f.time}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Who It's For -->
+    <section class="workshop-section workshop-for">
+      <h2>Who This Is For</h2>
+      <div class="for-grid">
+        <div class="for-card">
+          <h3>AP Lang Students</h3>
+          <p>Practice all three Free Response Question types: synthesis, rhetorical analysis, and argument. Timed prompts mirror the real exam.</p>
+        </div>
+        <div class="for-card">
+          <h3>AP Seminar Students</h3>
+          <p>Build the source analysis and research-based argument skills tested on the End-of-Course assessments (EOCa &amp; EOCb).</p>
+        </div>
+        <div class="for-card">
+          <h3>AP Capstone Candidates</h3>
+          <p>The full five-rung sequence covers every major essay skill in the Capstone pathway &mdash; Seminar through Research.</p>
+        </div>
+        <div class="for-card">
+          <h3>Any Student Who Writes</h3>
+          <p>Argument, analysis, evidence, structure &mdash; these skills transfer to every essay-based class and standardized test.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="workshop-section">
+      <h2>How It Works</h2>
+      <div class="steps-row">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Sign in with Google</h3>
+          <p>Your progress saves automatically. Come back anytime and pick up where you left off.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Climb the Ladder</h3>
+          <p>Work through five rungs in order. Each rung builds on the one before it &mdash; skills compound.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Write Under Pressure</h3>
+          <p>Every rung ends with a timed essay prompt that mirrors real AP exam conditions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="workshop-section workshop-cta">
+      <h2>Ready?</h2>
+      <p>It&rsquo;s free. It&rsquo;s rigorous. It&rsquo;s yours.</p>
+      <a href="/ap-essay-workshop/app/" class="btn-primary btn-launch">Launch the Workshop &rarr;</a>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .workshop-hero {
+    padding: 6rem 2rem 4rem;
+    text-align: center;
+    max-width: var(--content-width);
+    margin: 0 auto;
+  }
+  .workshop-hero-inner {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .workshop-hero h1 {
+    font-family: "Fraunces", serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+  .workshop-subtitle {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .workshop-pitch {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .workshop-pitch a {
+    color: var(--deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .workshop-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-launch {
+    font-size: 1.1rem;
+    padding: 0.9rem 2rem;
+  }
+
+  /* Sections */
+  .workshop-section {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .workshop-section h2 {
+    font-family: "Fraunces", serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .section-lead {
+    max-width: 42rem;
+    margin: 0 auto 3rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  /* Rung Grid */
+  .rung-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .rung-card {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: rgba(255, 253, 248, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 10px 15px -3px rgba(0,0,0,0.04);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .rung-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
+    background: rgba(255, 253, 248, 0.85);
+  }
+  .rung-number {
+    font-family: "Fraunces", serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--deep);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 2.5rem;
+    text-align: center;
+  }
+  .rung-body h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+    color: var(--ink);
+  }
+  .rung-exam {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    background: rgba(186, 90, 45, 0.08);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  .rung-body p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0.5rem 0;
+  }
+  .rung-time {
+    font-size: 0.8rem;
+    color: var(--muted);
+    opacity: 0.7;
+  }
+
+  /* Who It's For */
+  .for-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .for-card {
+    padding: 1.5rem;
+    background: rgba(255, 253, 248, 0.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+  }
+  .for-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin: 0 0 0.5rem;
+  }
+  .for-card p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Steps */
+  .steps-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .step-num {
+    font-family: "Fraunces", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .step h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+  .step p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* CTA */
+  .workshop-cta {
+    text-align: center;
+    padding-bottom: 6rem;
+  }
+  .workshop-cta p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .workshop-hero { padding: 4rem 1.5rem 3rem; }
+    .workshop-section { padding: 3rem 1.5rem; }
+    .rung-card { flex-direction: column; gap: 0.75rem; }
+    .rung-number { width: auto; }
+  }
+</style>
