@@ -11,7 +11,7 @@
 // 7. Add your domain to Authentication > Settings > Authorized domains
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBEePjO9g5vz6OQd42JCgoQ5TQ84uQBxFg",
+  apiKey: "AIzaSyCaxchF57v8bkXC9q_j6mNX09wJX5lHS1k",
   authDomain: "educationthatinspires-bb11a.firebaseapp.com",
   projectId: "educationthatinspires-bb11a",
   storageBucket: "educationthatinspires-bb11a.firebasestorage.app",
