@@ -232,6 +232,7 @@ export function render(container, savedData, ctx) {
       text: '&ldquo;Through precisely orchestrated spatial positioning, chess metaphors, and a recurring pattern of negation-and-correction, Michels transforms a historical scene into an argument about the relationship between physical space and intellectual power &mdash; each philosopher&rsquo;s body reveals his philosophy.&rdquo;'
     }
   ], { A: 1, B: 2, C: 3 });
+  if (saved['ranking-thesis-rank']) rankingExercise.loadSelections(saved['ranking-thesis-rank']);
 
   // -- Ranking discussion reveal --
   const rankingDiscussionHtml = `

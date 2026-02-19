@@ -212,6 +212,7 @@ export function render(container, savedData, ctx) {
     { id: 'D', label: 'Thesis D', text: 'There are many examples throughout history of people who failed before succeeding.' },
     { id: 'E', label: 'Thesis E', text: 'Failure is most valuable not when it &ldquo;builds character&rdquo; in some abstract sense, but when it forces a specific recalibration &mdash; a concrete change in method, strategy, or understanding that would not have occurred otherwise.' },
   ], { D: 1, A: 2, B: 3, E: 4, C: 5 });
+  if (saved['ranking-thesis-ranking']) thesisRanking.loadSelections(saved['ranking-thesis-ranking']);
 
   // Ranking explanation area
   const rankingExplainArea = WritingArea(4, 'activity2', 'ranking-explanations', {

@@ -100,6 +100,17 @@ export async function saveChecklist(uid, rung, checklistId, items) {
   }
 }
 
+// Save ranking exercise selections
+export async function saveRanking(uid, rung, rankingId, selections) {
+  try {
+    const path = `rungs.${rung}.activities.ranking-${rankingId}`;
+    await trackWrite(userDoc(uid).update({ [path]: selections }));
+    showSaved();
+  } catch (err) {
+    console.error('Error saving ranking:', err);
+  }
+}
+
 // Save editable table data
 export async function saveTableData(uid, rung, tableId, data) {
   try {

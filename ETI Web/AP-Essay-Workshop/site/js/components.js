@@ -1,7 +1,7 @@
 // ============================================
 // Reusable UI Components
 // ============================================
-import { saveResponse, saveTableData, saveChecklist } from './db.js';
+import { saveResponse, saveTableData, saveChecklist, saveRanking } from './db.js';
 import { getCurrentUser } from './auth.js';
 
 // ---- Helper ----
@@ -146,12 +146,29 @@ export function RankingExercise(rung, activityId, items, correctOrder = null) {
   // items: [{ id, label, text }]
   const container = el('div', { className: 'ranking-exercise' });
 
+  // Add clarity label so students know the scale direction
+  container.appendChild(el('p', { className: 'ranking-hint', style: 'font-style: italic; color: #666; margin-bottom: 0.5rem;' },
+    `Rank from 1 (weakest) to ${items.length} (strongest).`));
+
+  let saveDebounce = null;
+  function persistRanking() {
+    clearTimeout(saveDebounce);
+    saveDebounce = setTimeout(() => {
+      const currentUid = uid();
+      if (!currentUid) return;
+      const selections = {};
+      itemEls.forEach(r => { selections[r.itemId] = parseInt(r.select.value) || 0; });
+      saveRanking(currentUid, rung, activityId, selections);
+    }, 400);
+  }
+
   const itemEls = items.map((item, i) => {
     const select = el('select', { className: 'ranking-select' });
     select.appendChild(el('option', { value: '' }, '—'));
     for (let n = 1; n <= items.length; n++) {
       select.appendChild(el('option', { value: n }, String(n)));
     }
+    select.addEventListener('change', persistRanking);
     const row = el('div', { className: 'ranking-item' },
       select,
       el('div', { className: 'ranking-text' },
@@ -163,6 +180,14 @@ export function RankingExercise(rung, activityId, items, correctOrder = null) {
     row.itemId = item.id;
     return row;
   });
+
+  // Load saved ranking selections
+  container.loadSelections = function(saved) {
+    if (!saved) return;
+    itemEls.forEach(r => {
+      if (saved[r.itemId]) r.select.value = String(saved[r.itemId]);
+    });
+  };
 
   itemEls.forEach(r => container.appendChild(r));
 
