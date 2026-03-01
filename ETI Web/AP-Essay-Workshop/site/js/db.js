@@ -34,7 +34,8 @@ export async function loadProgress(uid) {
     if (doc.exists) {
       return doc.data();
     }
-    // Initialize new user
+    // Initialize new user — merge:true prevents accidental overwrite
+    // if doc.exists falsely returns false (offline cache, race condition)
     const initial = {
       currentRung: 1,
       rungs: {
@@ -45,7 +46,7 @@ export async function loadProgress(uid) {
         5: { completed: false, activities: {} }
       }
     };
-    await userDoc(uid).set(initial);
+    await userDoc(uid).set(initial, { merge: true });
     return initial;
   } catch (err) {
     console.error('Error loading progress:', err);

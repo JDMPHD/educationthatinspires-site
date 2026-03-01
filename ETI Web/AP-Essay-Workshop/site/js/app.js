@@ -67,6 +67,16 @@ async function navigateToRung(rung) {
   const requestId = ++navRequestId;
   activeRung = rung;
   updateNavState();
+
+  // Force-save all dirty textareas BEFORE destroying DOM.
+  // innerHTML = '' does NOT fire blur events, so pending debounces would be lost.
+  container.querySelectorAll('textarea.writing-area').forEach(ta => {
+    ta.dispatchEvent(new Event('blur'));
+  });
+
+  // Now flush all writes (including the ones we just triggered)
+  await flushPendingSaves();
+
   container.innerHTML = '';
   container.classList.add('fade-in');
 
@@ -78,7 +88,7 @@ async function navigateToRung(rung) {
     }
     if (requestId !== navRequestId) return;
 
-    // Ensure in-flight autosaves complete before loading the destination rung.
+    // Flush again in case dynamic import gave debounces time to fire
     await flushPendingSaves();
     if (requestId !== navRequestId) return;
 

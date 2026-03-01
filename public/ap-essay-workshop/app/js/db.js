@@ -5,6 +5,7 @@ import { db } from './firebase-config.js';
 
 const saveIndicator = document.getElementById('save-indicator');
 let saveTimeout = null;
+const pendingWrites = new Set();
 
 function showSaved() {
   saveIndicator.classList.remove('hidden');
@@ -13,6 +14,12 @@ function showSaved() {
   saveTimeout = setTimeout(() => {
     saveIndicator.classList.remove('visible');
   }, 2000);
+}
+
+function trackWrite(promise) {
+  pendingWrites.add(promise);
+  promise.finally(() => pendingWrites.delete(promise));
+  return promise;
 }
 
 // Get the user's document reference
@@ -27,7 +34,8 @@ export async function loadProgress(uid) {
     if (doc.exists) {
       return doc.data();
     }
-    // Initialize new user
+    // Initialize new user — merge:true prevents accidental overwrite
+    // if doc.exists falsely returns false (offline cache, race condition)
     const initial = {
       currentRung: 1,
       rungs: {
@@ -38,7 +46,7 @@ export async function loadProgress(uid) {
         5: { completed: false, activities: {} }
       }
     };
-    await userDoc(uid).set(initial);
+    await userDoc(uid).set(initial, { merge: true });
     return initial;
   } catch (err) {
     console.error('Error loading progress:', err);
@@ -50,7 +58,7 @@ export async function loadProgress(uid) {
 export async function saveResponse(uid, rung, activityId, responseId, value) {
   try {
     const path = `rungs.${rung}.activities.${activityId}.${responseId}`;
-    await userDoc(uid).update({ [path]: value });
+    await trackWrite(userDoc(uid).update({ [path]: value }));
     showSaved();
   } catch (err) {
     console.error('Error saving response:', err);
@@ -61,7 +69,7 @@ export async function saveResponse(uid, rung, activityId, responseId, value) {
 export async function completeActivity(uid, rung, activityId) {
   try {
     const path = `rungs.${rung}.activities.${activityId}.completed`;
-    await userDoc(uid).update({ [path]: true });
+    await trackWrite(userDoc(uid).update({ [path]: true }));
     showSaved();
   } catch (err) {
     console.error('Error completing activity:', err);
@@ -75,7 +83,7 @@ export async function completeRung(uid, rung) {
     if (rung < 5) {
       updates.currentRung = rung + 1;
     }
-    await userDoc(uid).update(updates);
+    await trackWrite(userDoc(uid).update(updates));
     showSaved();
   } catch (err) {
     console.error('Error completing rung:', err);
@@ -86,10 +94,21 @@ export async function completeRung(uid, rung) {
 export async function saveChecklist(uid, rung, checklistId, items) {
   try {
     const path = `rungs.${rung}.activities.${checklistId}`;
-    await userDoc(uid).update({ [path]: items });
+    await trackWrite(userDoc(uid).update({ [path]: items }));
     showSaved();
   } catch (err) {
     console.error('Error saving checklist:', err);
+  }
+}
+
+// Save ranking exercise selections
+export async function saveRanking(uid, rung, rankingId, selections) {
+  try {
+    const path = `rungs.${rung}.activities.ranking-${rankingId}`;
+    await trackWrite(userDoc(uid).update({ [path]: selections }));
+    showSaved();
+  } catch (err) {
+    console.error('Error saving ranking:', err);
   }
 }
 
@@ -97,9 +116,14 @@ export async function saveChecklist(uid, rung, checklistId, items) {
 export async function saveTableData(uid, rung, tableId, data) {
   try {
     const path = `rungs.${rung}.activities.${tableId}`;
-    await userDoc(uid).update({ [path]: data });
+    await trackWrite(userDoc(uid).update({ [path]: data }));
     showSaved();
   } catch (err) {
     console.error('Error saving table:', err);
   }
+}
+
+export async function flushPendingSaves() {
+  if (!pendingWrites.size) return;
+  await Promise.allSettled(Array.from(pendingWrites));
 }

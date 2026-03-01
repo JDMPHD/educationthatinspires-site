@@ -2,13 +2,14 @@
 // Main Application
 // ============================================
 import { onUserReady, getCurrentUser } from './auth.js';
-import { loadProgress, completeRung } from './db.js';
+import { loadProgress, completeRung, flushPendingSaves } from './db.js';
 import { EarlierWorkPanel } from './components.js';
 
 // Rung modules will be loaded dynamically
 const rungModules = {};
 let progress = null;
 let activeRung = null;
+let navRequestId = 0;
 
 const container = document.getElementById('rung-container');
 const navItems = document.querySelectorAll('.rung-nav-item');
@@ -53,9 +54,29 @@ function updateNavState() {
   });
 }
 
+async function refreshProgressFromServer() {
+  const user = getCurrentUser();
+  if (!user) return;
+  const latest = await loadProgress(user.uid);
+  if (latest) {
+    progress = latest;
+  }
+}
+
 async function navigateToRung(rung) {
+  const requestId = ++navRequestId;
   activeRung = rung;
   updateNavState();
+
+  // Force-save all dirty textareas BEFORE destroying DOM.
+  // innerHTML = '' does NOT fire blur events, so pending debounces would be lost.
+  container.querySelectorAll('textarea.writing-area').forEach(ta => {
+    ta.dispatchEvent(new Event('blur'));
+  });
+
+  // Now flush all writes (including the ones we just triggered)
+  await flushPendingSaves();
+
   container.innerHTML = '';
   container.classList.add('fade-in');
 
@@ -65,6 +86,16 @@ async function navigateToRung(rung) {
       const module = await import(`./rung${rung}.js`);
       rungModules[rung] = module;
     }
+    if (requestId !== navRequestId) return;
+
+    // Flush again in case dynamic import gave debounces time to fire
+    await flushPendingSaves();
+    if (requestId !== navRequestId) return;
+
+    // Refresh progress before render so navigating away/back reflects latest saved work.
+    await refreshProgressFromServer();
+    if (requestId !== navRequestId) return;
+    updateNavState();
 
     // Show earlier writing panel for rungs 2+
     if (rung > 1 && progress) {
