@@ -3,6 +3,6 @@ dist/
 .astro/
 /photos/
 public/images/library/raw/
+.DS_Store
 
 # Firebase config — API keys are client-side by design (domain-restricted in Firebase console)
-
