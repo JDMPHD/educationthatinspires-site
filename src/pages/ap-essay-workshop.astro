@@ -5,6 +5,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 
 const title = "Free AP Essay Workshop | Practice AP Lang & AP Seminar Essays Online";
 const description = "Free interactive AP essay practice for AP English Language, AP Seminar, and AP Capstone students. Build skills in rhetorical analysis, source-based argument, synthesis, and timed essay writing — no account required to explore.";
+const workshopImage = "/images/photos/workshop-collaboration.jpg";
 
 const features = [
   {
@@ -84,6 +85,14 @@ const features = [
           <a href="/ap-essay-workshop/app/" class="btn-primary btn-launch">Start the Workshop &rarr;</a>
           <a href="#how-it-works" class="btn-secondary">See What&rsquo;s Inside</a>
         </div>
+      </div>
+      <div class="workshop-hero-media reveal" data-delay="100">
+        <img
+          src={workshopImage}
+          alt="Dr. Julian delivering a keynote presentation on seminar-based learning"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </section>
 
@@ -178,6 +187,20 @@ const features = [
   .workshop-hero-inner {
     max-width: 48rem;
     margin: 0 auto;
+  }
+  .workshop-hero-media {
+    max-width: 58rem;
+    margin: 2.5rem auto 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(217, 208, 193, 0.72);
+    background: var(--surface);
+  }
+  .workshop-hero-media img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
   .eyebrow {
     font-size: 0.85rem;
